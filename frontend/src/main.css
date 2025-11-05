@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Digital';
+    src: url('./assets/fonts/digital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #f6f6f6;
+}
