@@ -37,7 +37,7 @@ const Item: FC<ItemProps> = ({ title, description, url }) => {
     }, [navigate, url]);
 
     return (
-        <Card boxShadow="lg">
+        <Card maxW="350px" boxShadow="lg">
             <CardBody>
                 <Text fontSize="lg" fontWeight="bold" mb={2}>{title}</Text>
                 <Text fontSize="md">{description}</Text>
