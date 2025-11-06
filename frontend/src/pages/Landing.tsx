@@ -5,6 +5,11 @@ import { internalRoutes } from "../routes";
 
 const NAVIGATION_ITEMS = [
     {
+        title: '📚 World of Scans',
+        description: 'World Of Scans application allows users to read their favorite manga for free',
+        url: 'https://wos.leodubosclard.com',
+    },
+    {
         title: '🕰️ Countdown',
         description: 'Create a countdown to a specific date to share with your friends and family.',
         url: internalRoutes.countdown.create,
@@ -33,7 +38,8 @@ const Item: FC<ItemProps> = ({ title, description, url }) => {
     const navigate = useNavigate();
 
     const handleView = useCallback(() => {
-        navigate(url);
+        if (url.startsWith('http')) window.location.href = url;
+        else navigate(url);
     }, [navigate, url]);
 
     return (
