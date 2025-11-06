@@ -12,7 +12,7 @@ const CONFETTI_INTERVAL = 100;
 
 export const CountdownPage = () => {
     const [query] = useSearchParams();
-    const [now, setNow] = useState(dayjs());
+    const [tick, setTick] = useState(0);
 
     const date = useMemo(() => {
         const stringDate = query.get('date');
@@ -23,18 +23,18 @@ export const CountdownPage = () => {
 
     const dayDiff = useMemo(() => {
         if (!date) return 0;
-        const diff = date.diff(now, 'day');
+        const diff = date.diff(dayjs(), 'day');
         return diff >= 1 ? diff : 0;
-    }, [date, now]);
+    }, [date, tick]);
 
     const duration = useMemo(() => {
         if (!date) return '--:--:--';
 
-        const diff = date.diff(now);
+        const diff = date.diff(dayjs());
         if (diff <= 0) return '00:00:00';
 
         const dur = dayjs.duration(diff);
-        const days = dur.days();
+        const days = Math.floor(dur.asDays());
         const hours = String(dur.hours()).padStart(2, '0');
         const minutes = String(dur.minutes()).padStart(2, '0');
         const seconds = String(dur.seconds()).padStart(2, '0');
@@ -42,14 +42,14 @@ export const CountdownPage = () => {
         return days >= 1
             ? `${String(days).padStart(2, '0')}:${hours}:${minutes}:${seconds}`
             : `${hours}:${minutes}:${seconds}`;
-    }, [date, now]);
+    }, [date, tick]);
 
     const title = useMemo(() => (decodeURIComponent(query.get('title') ?? 'Countdown')).slice(0, 20), [query]);
 
     useEffect(() => {
         if (!date) return;
 
-        const interval = setInterval(() => setNow(dayjs()), 1000);
+        const interval = setInterval(() => setTick((old) => old + 1), 1000);
         return () => clearInterval(interval);
     }, [date]);
 
