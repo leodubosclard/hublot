@@ -27,22 +27,22 @@ export const CountdownPage = () => {
         return diff >= 1 ? diff : 0;
     }, [date, tick]);
 
-    const duration = useMemo(() => {
+    const durationString = useMemo(() => {
         if (!date) return '--:--:--';
 
         const diff = date.diff(dayjs());
         if (diff <= 0) return '00:00:00';
 
-        const dur = dayjs.duration(diff);
-        const days = Math.floor(dur.asDays());
-        const hours = String(dur.hours()).padStart(2, '0');
-        const minutes = String(dur.minutes()).padStart(2, '0');
-        const seconds = String(dur.seconds()).padStart(2, '0');
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
 
         return days >= 1
-            ? `${String(days).padStart(2, '0')}:${hours}:${minutes}:${seconds}`
-            : `${hours}:${minutes}:${seconds}`;
-    }, [date, tick]);
+          ? `${String(days).padStart(2, '0')}:${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+          : `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, [date, tick]);
 
     const title = useMemo(() => (decodeURIComponent(query.get('title') ?? 'Countdown')).slice(0, 20), [query]);
 
@@ -111,7 +111,7 @@ export const CountdownPage = () => {
                     display="inline-block"
                 >
                     <HStack w="100%" justify="center" spacing={3}>
-                        {duration.split('').map((char, i) => (
+                        {durationString.split('').map((char, i) => (
                             <Text
                                 key={i}
                                 fontFamily="digital"
