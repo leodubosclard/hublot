@@ -14,6 +14,11 @@ const NAVIGATION_ITEMS = [
         description: 'Create a countdown to a specific date to share with your friends and family.',
         url: internalRoutes.countdown.create,
     },
+    {
+        title: '🎬 Subtitles',
+        description: 'Translate your subtitles files (.srt) from one language to another.',
+        url: internalRoutes.subtitles,
+    },
 ];
 
 export const LandingPage = () => (
