@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-import { Lang, langLabels } from 'src/subtitles/types/lang.type';
+import { Lang, langLabels } from './types/lang.type';
 import * as fs from 'fs-extra';
 
 @Injectable()

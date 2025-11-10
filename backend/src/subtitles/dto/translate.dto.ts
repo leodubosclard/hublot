@@ -1,4 +1,4 @@
-import { Lang } from 'src/subtitles/types/lang.type';
+import { Lang } from '../types/lang.type';
 
 export class TranslateDto {
   from: Lang;

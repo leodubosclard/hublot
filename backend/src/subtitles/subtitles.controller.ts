@@ -7,8 +7,8 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { SubtitlesService } from 'src/subtitles/subtitles.service';
-import { TranslateDto } from 'src/subtitles/dto/translate.dto';
+import { SubtitlesService } from './subtitles.service';
+import { TranslateDto } from './dto/translate.dto';
 import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 
