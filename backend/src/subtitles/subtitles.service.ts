@@ -53,8 +53,8 @@ export class SubtitlesService {
     return results;
   }
 
-  async translateSRT(filePath: string, from: Lang, to: Lang): Promise<Buffer> {
-    const content = await fs.readFile(filePath, 'utf-8');
+  async translateSRT(buffer: Buffer, from: Lang, to: Lang): Promise<Buffer> {
+    const content = buffer.toString('utf-8');
     const lines = content.split('\n');
     const translatedLines: string[] = [...lines];
 
