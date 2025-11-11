@@ -28,7 +28,7 @@ export class SubtitlesController {
       throw new BadRequestException('Missing from or to language');
 
     const translatedBuffer = await this.subtitlesService.translateSRT(
-      file.path,
+      file.buffer,
       body.from,
       body.to,
     );
