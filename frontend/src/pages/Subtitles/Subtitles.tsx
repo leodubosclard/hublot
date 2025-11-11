@@ -138,7 +138,7 @@ export const SubtitlesPage = () => {
                                     >
                                         {Object.values(Lang).map(lang => (
                                             <option key={lang} value={lang} disabled={lang === from}>
-                                                {langLabels[lang]} {lang === from ? '(Same as from)' : ''}
+                                                {langLabels[lang]}
                                             </option>
                                         ))}
                                     </Select>
