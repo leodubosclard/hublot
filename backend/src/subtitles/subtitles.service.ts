@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
 import { Lang, langLabels } from './types/lang.type';
+import { appConstants, openaiConstants } from 'src/utils/environment';
 
 @Injectable()
 export class SubtitlesService {
-  private readonly openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  private readonly openai = new OpenAI({ apiKey: openaiConstants.apiKey });
 
   private async translateLine(
     line: string,
@@ -35,7 +36,7 @@ export class SubtitlesService {
   private async promisePool<T>(
     items: T[],
     worker: (item: T, index: number) => Promise<any>,
-    concurrency = 20,
+    concurrency = 60,
   ): Promise<any[]> {
     const results: any[] = [];
     let i = 0;
@@ -78,5 +79,42 @@ export class SubtitlesService {
     });
 
     return Buffer.from(translatedLines.join('\n'), 'utf-8');
+  }
+
+  async translateWholeSRT(
+    buffer: Buffer,
+    from: Lang,
+    to: Lang,
+  ): Promise<Buffer> {
+    const content = buffer.toString('utf-8');
+
+    const response = await this.openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: `Tu es un traducteur professionnel de sous-titres.
+          Traduis ce fichier SRT entier du ${langLabels[from]} vers le ${langLabels[to]}.
+          Ne modifie pas la structure, garde les numéros et les timestamps inchangés.
+          Ne supprime rien, ne rajoute rien, traduis uniquement le texte parlé.`,
+        },
+        { role: 'user', content },
+      ],
+      temperature: 0,
+    });
+
+    if (appConstants.isDevelopment) {
+      const usage = response.usage;
+      if (usage) {
+        const inputCost = (usage.prompt_tokens * 0.00015) / 1000;
+        const outputCost = (usage.completion_tokens * 0.0006) / 1000;
+        const totalCost = inputCost + outputCost;
+
+        console.log(`💰 Estimated cost : $${totalCost.toFixed(4)}`);
+      }
+    }
+
+    const translated = response.choices[0].message.content.trim();
+    return Buffer.from(translated, 'utf-8');
   }
 }
