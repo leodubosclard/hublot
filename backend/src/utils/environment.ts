@@ -3,10 +3,12 @@ export enum Environment {
   PRODUCTION = 'production',
 }
 
+const environment = process.env.NODE_ENV || Environment.DEVELOPMENT;
+
 export const appConstants = {
-  environment: process.env.NODE_ENV || Environment.DEVELOPMENT,
-  isProduction: process.env.NODE_ENV === Environment.PRODUCTION,
-  isDevelopment: process.env.NODE_ENV === Environment.DEVELOPMENT,
+  environment,
+  isProduction: environment === Environment.PRODUCTION,
+  isDevelopment: environment === Environment.DEVELOPMENT,
 };
 
 export const openaiConstants = {
