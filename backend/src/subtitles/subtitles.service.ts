@@ -88,6 +88,7 @@ export class SubtitlesService {
   ): Promise<Buffer> {
     const content = buffer.toString('utf-8');
 
+    console.log('coucou');
     const response = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -102,6 +103,7 @@ export class SubtitlesService {
       ],
       temperature: 0,
     });
+    console.log('coucou 2');
 
     if (appConstants.isDevelopment) {
       const usage = response.usage;
