@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
 import { Lang, langLabels } from './types/lang.type';
-import { appConstants, openaiConstants } from 'src/utils/environment';
+import { appConstants, openaiConstants } from '../utils/environment';
 
 @Injectable()
 export class SubtitlesService {
