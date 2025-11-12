@@ -19,6 +19,11 @@ const NAVIGATION_ITEMS = [
         description: 'Translate your subtitles files (.srt) from one language to another.',
         url: internalRoutes.subtitles,
     },
+    {
+        title: '🎬 Video Viewer',
+        description: 'View your video files with subtitles in a web browser.',
+        url: internalRoutes.videoViewer,
+    },
 ];
 
 export const LandingPage = () => (
