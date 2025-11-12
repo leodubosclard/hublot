@@ -3,6 +3,7 @@ import { LandingPage } from "../pages/Landing";
 import { CountdownPage } from "../pages/Countdown/Countdown";
 import { CreateCountdownPage } from "../pages/Countdown/Create";
 import { SubtitlesPage } from "../pages/Subtitles/Subtitles";
+import { VideoViewerPage } from "../pages/VideoViewer/VideoViewer";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     path: '/subtitles',
     element: <SubtitlesPage />,
   },
+  {
+    path: '/video-viewer',
+    element: <VideoViewerPage />,
+  }
 ]);
 
 export const Router = () => (

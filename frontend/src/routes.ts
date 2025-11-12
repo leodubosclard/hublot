@@ -5,4 +5,5 @@ export const internalRoutes = {
         create: '/countdown/create',
     },
     subtitles: '/subtitles',
+    videoViewer: '/video-viewer',
 };
