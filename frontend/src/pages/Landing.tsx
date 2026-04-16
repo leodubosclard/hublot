@@ -10,6 +10,11 @@ const NAVIGATION_ITEMS = [
         url: 'https://wos.leodubosclard.com',
     },
     {
+        title: '💸 DCA Simulator',
+        description: 'DCA Simulator application allows users to simulate their DCA strategy.',
+        url: 'https://dca.leodubosclard.com',
+    },
+    {
         title: '🕰️ Countdown',
         description: 'Create a countdown to a specific date to share with your friends and family.',
         url: internalRoutes.countdown.create,
