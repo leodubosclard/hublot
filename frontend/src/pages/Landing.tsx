@@ -15,6 +15,11 @@ const NAVIGATION_ITEMS = [
         url: 'https://rise.leodubosclard.com',
     },
     {
+        title: '🖼️ Lego Poster',
+        description: 'Lego Poster application allows user to create a poster with their favorite album covers',
+        url: 'https://poster.leodubosclard.com',
+    },
+    {
         title: '🕰️ Countdown',
         description: 'Create a countdown to a specific date to share with your friends and family.',
         url: internalRoutes.countdown.create,
